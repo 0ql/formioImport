@@ -6,7 +6,10 @@ html, body {
 	height: 100%;
 }
 
-input {
-	padding: 0.5rem;
-	width: 90%;
+* {
+	font-family: 'Lunchtype22', sans-serif;
+}
+
+.flex {
+	display: flex;
 }

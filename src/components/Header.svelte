@@ -1,5 +1,5 @@
 <nav class="nav">
-	Formio Importer
+	Formio Data Uploader
 </nav>
 
 <style>
