@@ -4,5 +4,5 @@
   val = "https://wpjilvsfrouawvl.form.io/";
 </script>
 
-<div>API Path angeben</div>
-<input bind:value={val} type="url" placeholder="z.B: https://abcdefghijklmnop.form.io/">
+<div>API Path / Live Endpoint angeben</div>
+<input class="form-control" bind:value={val} type="url" placeholder="z.B: https://abcdefghijklmnop.form.io/">

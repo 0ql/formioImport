@@ -29,43 +29,28 @@
 	}
 </script>
 
-<main>
-  <Header />
-	<div class="wrap">
+<Header />
+<main class="container">
+	<div class="mt-5">
 		<LiveEndPoint bind:val={apiPath}/>
 		<Recource bind:val={recource}/><br>
-		<button class="btn" on:click={fetchDefinition}>Bestätigen</button>
+		{#if error}
+			<div class="alert alert-danger" role="alert">
+				{errorMsg}
+			</div>
+		{/if}
+		<button type="button" class="btn btn-primary" on:click={fetchDefinition}>Bestätigen</button>
 	</div>
-	<div class="wrap">
+	<div class="mt-3">
 		<DropZone bind:fields={fields}/>
 	</div>
-	{#if error}
-		<div>
-			{errorMsg}
-		</div>
-	{/if}
 	{#if definition}
 		<DefinitionRenderer bind:indexArray={indexArray} bind:keyArray={keyArray} bind:components={definition.components}/>
 	{/if}
 	{#if definition && fields}
-		<button on:click={_ => bestätigt = true}>Bestätigen</button>
+		<button type="button" class="btn btn-primary mt-3 mb-5" on:click={_ => bestätigt = true}>Bestätigen</button>
 	{/if}
 	{#if bestätigt && definition}
 		<Uploader components={definition.components} indexArray={indexArray} keyArray={keyArray} fields={fields} apiPath={apiPath} recource={recource}/>
 	{/if}
 </main>
-
-
-<style>
-	.wrap {
-		padding-top: 1rem;
-		padding-left: 10%;
-		padding-right: 10%;
-	}
-
-	button {
-		margin-top: 2rem;
-		padding: 0.6rem;
-		border-radius: 6px;
-	}
-</style>

@@ -2,14 +2,14 @@
   export let fields, apiPath, recource, keyArray, indexArray, components;
 
   fields = fields.data;
-  let error = false;
+	let error = false, errorMsg;
   let j = 1; // Das erste Feld soll ausgelassen werden
 
   function upload() {
 
     // Daten Objekt erstellen
     let data = {};
-    console.log(keyArray, components, fields);
+    // console.log(keyArray, components, fields);
     for (let i = 0; i < indexArray.length; i++) { // sollte gleiche Länge wie die Components haben
 
       if (components[i].type === "textfield") {
@@ -32,13 +32,19 @@
         'Content-Type': 'application/json'
       },
       body: data
-    }).then(res => {
-      console.log("Antwort", res);
+		})
+		.then(res => res.json())
+		.then(body => {
+			console.log("Antwort", body);
       if (j === fields.length-2) return;
       j++;
       upload();
-    }).catch(error => {
-      console.log("Fehler", error);
+		})
+		.catch(er => {
+			// TODO: errorhandling
+			console.log(er);
+			error = true;
+			errorMsg = er;
     });
     
   }
@@ -48,5 +54,7 @@
 </script>
 
 {#if error}
-  <div>Error</div>
+  <div class="alert alert-danger" role="alert">
+		{errorMsg}
+	</div>
 {/if}

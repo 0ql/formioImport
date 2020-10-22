@@ -1,4 +1,5 @@
 <script>
+	import Feld from "./Feld.svelte";
   export let components;
   let error = false, errorMsg
   export let indexArray = [];
@@ -26,24 +27,15 @@
 </script>
 
 {#if !error}
-  <div class="form">
+  <div class="mt-3 form">
     {#each components as component, i}
       {#if component.type === "textfield"}
-        <div class="flex">
-          <input type="number" class="small" bind:value={indexArray[i]}>
-          <!-- <input type="text" bind:value={data[i][keyArray[i]]}> -->
-          <div>Text Feld</div>
-        </div>
+        <!-- <input type="text" bind:value={data[i][keyArray[i]]}> -->
+				<Feld bind:index={indexArray[i]} msg={"Text Feld"}/>
       {:else if component.type === "textarea"}
-        <div class="flex">
-          <input type="number" class="small" bind:value={indexArray[i]}>
-          <div>Text Area Feld</div>
-        </div>
+        <Feld bind:index={indexArray[i]} msg={"Text Area Feld"}/>
       {:else if component.type === "number"}
-        <div class="flex">
-          <input type="number" class="small" bind:value={indexArray[i]}>
-          <div>Number Feld</div>
-        </div>
+				<Feld bind:index={indexArray[i]} msg={"Number Feld"}/>
       {/if}
     {/each}
   </div>
@@ -58,12 +50,5 @@
     padding: 2rem;
     background-color: #ecf0f1;
     border-radius: 8px;
-    margin-top: 2rem;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-
-  .small {
-    width: 3rem;
   }
 </style>
