@@ -19,8 +19,10 @@
       // parse CSV
       fields = Papa.parse(fr.result);
       parsed = true;
+      console.log(fields.data)
     }
     fr.readAsText(e.dataTransfer.files[0])
+    
   }
 </script>
 

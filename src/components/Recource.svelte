@@ -1,7 +1,7 @@
 <script>
   export let val;
 
-  val = "in"
+  val = "in";
 </script>
 
 

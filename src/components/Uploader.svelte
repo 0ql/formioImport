@@ -1,22 +1,52 @@
 <script>
-  export let fields, apiPath, recource, keyArray, indexArray;
-  let data = [];
+  export let fields, apiPath, recource, keyArray, indexArray, components;
+
   fields = fields.data;
-  console.log(fields)
-  for (let j = 1; j < fields.length-1; j++) {
-    // Upload to Formio
+  let error = false;
+  let j = 1; // Das erste Feld soll ausgelassen werden
 
-    data = [];
-    for (let i = 0; i < indexArray.length; i++) {
-      let ob = {};
-      ob[keyArray[i]] = fields[j][indexArray[i]];
-      data.push(ob);
+  function upload() {
+
+    // Daten Objekt erstellen
+    let data = {};
+    console.log(keyArray, components, fields);
+    for (let i = 0; i < indexArray.length; i++) { // sollte gleiche Länge wie die Components haben
+
+      if (components[i].type === "textfield") {
+        data[keyArray[i]] = fields[j][indexArray[i]];
+      } else if (components[i].type === "textarea") {
+        data[keyArray[i]] = fields[j][indexArray[i]];
+      } else if (components[i].type === "number") {
+        // TODO: parseFloat parsed nummern weg
+        data[keyArray[i]] = parseFloat(fields[j][indexArray[i]]);
+      } else {
+        error = true;
+      }
     }
-    console.log(data);
 
-    // fetch(apiPath+"/"+recource+"/submission", {
-    //   method: 'POST',
-    //   body: 
-    // })
-  };
+    data = JSON.stringify({"data": data});
+
+    fetch("https://wpjilvsfrouawvl.form.io/in/submission", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data
+    }).then(res => {
+      console.log("Antwort", res);
+      if (j === fields.length-2) return;
+      j++;
+      upload();
+    }).catch(error => {
+      console.log("Fehler", error);
+    });
+    
+  }
+
+  upload();
+
 </script>
+
+{#if error}
+  <div>Error</div>
+{/if}

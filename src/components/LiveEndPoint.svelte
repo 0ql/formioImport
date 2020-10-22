@@ -1,7 +1,7 @@
 <script>
   export let val;
 
-  val = "https://govforms.backend.test.publicplan.de/atxwulhxntzjvyf";
+  val = "https://wpjilvsfrouawvl.form.io/";
 </script>
 
 <div>API Path angeben</div>
