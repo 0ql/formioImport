@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "DropZone.svelte",
+    "Header.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n  let dropEvent = false, parsed = false, box;\n\texport let fields;\n\n  function dragEnter(el) {\n    box.style.border = \"thick dashed #cd6133\";\n    box.style.color = \"gray\";\n  }\n\n  function dragLeave() {\n    box.style.border = \"thick dashed #ffbe76\";\n    box.style.color = \"#222f3e\";\n  }\n\n  function drop(e) {\n    dropEvent = true;\n    e.preventDefault();\n\n    let fr = new FileReader();\n    fr.onload = () => {\n      fields = Papa.parse(fr.result);\n      parsed = true;\n    }\n    fr.readAsText(e.dataTransfer.files[0]);\n  }\n</script>\n\n<div class=\"mt-5\">\n\t{#if !dropEvent}\n\t\t<div class=\"dropzone text-center\" bind:this={box} on:dragenter={dragEnter} on:dragleave={dragLeave} on:drop={drop} ondragover=\"return false\">\n\t\t\tCSV Datei hier hinein ziehen\n\t\t</div>\n\t{:else if parsed}\n\t\t<div class=\"border rounded p-3\">\n\t\t\t<h5 class=\"mb-3\">Die Anzahl der Datensätze Beträgt: {fields.data.length-2}</h5>\n\t\t\t{#each fields.data[0] as field, i}\n\t\t\t\t<div class=\"alert alert-dark\" role=\"alert\">{i+\": \"+field}</div>\n\t\t\t{/each}\n\t\t</div>\n\t{/if}\n</div>\n\n<style>\n  .dropzone {\n    padding: 5rem;\n    border: thick dashed #ffbe76;\n    border-width: 4px;\n    border-radius: 8px;\n\t}\n\t\n\t.data {\n\t\tbackground-color: #ecf0f1;\n\t\tborder-radius: 8px;\n\t\tpadding: 1rem;\n\t}\n</style>",
+    "<nav class=\"nav\">\n\tFormio Data Uploader\n</nav>\n\n<style>\n\t.nav {\n\t\tmargin: 0px;\n\t\tpadding: 1rem;\n\t\tfont-size: 1.125rem;\n\t\tcolor: #222f3e;\n\t\tbackground: #ff9f43;\n\t}\n</style>"
+  ],
+  "names": [],
+  "mappings": "AA2CE,SAAS,cAAC,CAAC,AACT,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,KAAK,CAAC,MAAM,CAAC,OAAO,CAC5B,YAAY,CAAE,GAAG,CACjB,aAAa,CAAE,GAAG,AACrB,CAAC;AC3CD,IAAI,eAAC,CAAC,AACL,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,IAAI,CACb,SAAS,CAAE,QAAQ,CACnB,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,OAAO,AACpB,CAAC"
+}
