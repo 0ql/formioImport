@@ -1,11 +1,12 @@
 <script>
   export let fields, apiPath, recource, keyArray, indexArray, components;
   let j = 1, pressed = false, error = false, errorMsg, progress = 0, onePercent;
-  let progressBar, done = false;
+  let progressBar, done = false, uploadActive = false;
+  fields = fields.data;
 
   function startUpload() {
-    fields = fields.data;
     pressed = true;
+    uploadActive = true;
 
     // compute Progress
     onePercent = (fields.length-2) / 100;
@@ -15,6 +16,13 @@
   function updateProgress() {
     progress = j / onePercent;
     progressBar.style.width = progress+"%";
+  }
+
+  function reset() {
+    pressed = false;
+    // progress = 0;
+    // j = 1;
+    // progressBar.style.width = progress+"%";
   }
 
   function upload() {
@@ -57,7 +65,7 @@
 
     data = JSON.stringify({"data": data});
 
-    fetch("https://wpjilvsfrouawvl.form.io/in/submission", {
+    fetch(apiPath+"/"+recource+"/submission", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -73,7 +81,8 @@
         return;
       }; // NOTE: Papaparse Bug verursacht noch eine lehre Array am ende
       j++;
-      upload();
+      
+      uploadActive ? upload() : reset();
 		})
 		.catch(er => {
 			// TODO: errorhandling
@@ -87,7 +96,7 @@
 </script>
 
 {#if error}
-  <div class="alert alert-danger" role="alert">{errorMsg}</div>
+  <div class="alert alert-danger mt-3" role="alert">{errorMsg}</div>
 {:else if !pressed}
   <button type="button" class="btn btn-success mt-3" on:click={startUpload}>Upload Starten</button>
 {:else}
@@ -97,9 +106,17 @@
   <div class="progress mt-3">
     <div bind:this={progressBar} class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
+  {#if !done}
+    <button on:click={_ => uploadActive = false} type="button" class="btn btn-danger mt-3">
+      Upload stoppen
+    </button>
+  {/if}
   {#if done}
     <div class="alert alert-success mt-3" role="alert">
       Datenbank erfolgreich hochgeladen
     </div>
+    <button type="button" class="btn btn-danger" on:click={_ => window.location.reload()}>
+      Zurücksetzten
+    </button>
   {/if}
 {/if}

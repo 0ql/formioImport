@@ -3,11 +3,13 @@
 	export let fields;
 
   function dragEnter(el) {
-		box.style.border = "thick dashed #cd6133";
+    box.style.border = "thick dashed #cd6133";
+    box.style.color = "gray";
   }
 
   function dragLeave() {
     box.style.border = "thick dashed #ffbe76";
+    box.style.color = "#222f3e";
   }
 
   function drop(e) {
@@ -18,7 +20,6 @@
     fr.onload = () => {
       fields = Papa.parse(fr.result);
       parsed = true;
-      console.log(fields)
     }
     fr.readAsText(e.dataTransfer.files[0]);
   }
@@ -30,10 +31,10 @@
 			CSV Datei hier hinein ziehen
 		</div>
 	{:else if parsed}
-		<div class="data">
-			<div class="mb-3">Die Anzahl der Datensätze Beträgt: {fields.data.length-2}</div>
+		<div class="border rounded p-3">
+			<h5 class="mb-3">Die Anzahl der Datensätze Beträgt: {fields.data.length-2}</h5>
 			{#each fields.data[0] as field, i}
-				<div>{i+": "+field}</div>
+				<div class="alert alert-dark" role="alert">{i+": "+field}</div>
 			{/each}
 		</div>
 	{/if}

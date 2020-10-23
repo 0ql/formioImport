@@ -27,7 +27,7 @@
 </script>
 
 {#if !error}
-  <div class="mt-3 form">
+  <div class="border rounded pl-3 pr-3 pb-3 mt-3">
     {#each components as component, i}
       {#if component.type === "textfield"}
         <!-- <input type="text" bind:value={data[i][keyArray[i]]}> -->

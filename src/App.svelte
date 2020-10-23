@@ -30,7 +30,7 @@
 </script>
 
 <Header />
-<main class="container">
+<main class="container mb-5">
 	<div class="mt-5">
 		<LiveEndPoint bind:val={apiPath}/>
 		<Recource bind:val={recource}/><br>
