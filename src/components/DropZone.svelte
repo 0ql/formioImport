@@ -18,6 +18,7 @@
     fr.onload = () => {
       fields = Papa.parse(fr.result);
       parsed = true;
+      console.log(fields)
     }
     fr.readAsText(e.dataTransfer.files[0]);
   }

@@ -7,7 +7,7 @@
 	import Uploader from "./components/Uploader.svelte";
 
 	let recource, apiPath, error = false, errorMsg, definition;
-	let fields, keyArray, indexArray, bestätigt = false;
+	let fields, keyArray, indexArray;
 
 	async function fetchDefinition() {
 		// Definition von formio holen
@@ -48,9 +48,6 @@
 		<DefinitionRenderer bind:indexArray={indexArray} bind:keyArray={keyArray} bind:components={definition.components}/>
 	{/if}
 	{#if definition && fields}
-		<button type="button" class="btn btn-primary mt-3 mb-5" on:click={_ => bestätigt = true}>Bestätigen</button>
-	{/if}
-	{#if bestätigt && definition}
 		<Uploader components={definition.components} indexArray={indexArray} keyArray={keyArray} fields={fields} apiPath={apiPath} recource={recource}/>
-	{/if}
+		{/if}
 </main>
