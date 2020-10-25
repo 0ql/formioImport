@@ -105,7 +105,7 @@
   </div>
   {#if !done}
     <button on:click={_ => uploadActive = false} type="button" class="btn btn-danger mt-3">
-      Upload stoppen
+      Upload pausieren
     </button>
   {/if}
   {#if done}
