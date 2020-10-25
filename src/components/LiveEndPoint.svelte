@@ -1,7 +1,5 @@
 <script>
   export let val;
-
-  val = "https://wpjilvsfrouawvl.form.io/";
 </script>
 
 <div>API Path / Live Endpoint angeben</div>
