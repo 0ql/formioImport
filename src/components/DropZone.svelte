@@ -47,10 +47,4 @@
     border-width: 4px;
     border-radius: 8px;
 	}
-	
-	.data {
-		background-color: #ecf0f1;
-		border-radius: 8px;
-		padding: 1rem;
-	}
 </style>

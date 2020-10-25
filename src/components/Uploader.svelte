@@ -20,9 +20,6 @@
 
   function reset() {
     pressed = false;
-    // progress = 0;
-    // j = 1;
-    // progressBar.style.width = progress+"%";
   }
 
   function upload() {

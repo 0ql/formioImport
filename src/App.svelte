@@ -10,8 +10,6 @@
 	let fields, keyArray, indexArray;
 
 	async function fetchDefinition() {
-		// Definition von formio holen
-		// validierung der Inputs
 		if (!recource || !apiPath) {
 			error = true;
 			errorMsg = "Bitte füllen sie zuerst die Felder aus";
@@ -24,7 +22,7 @@
 				console.log(msg)
 				error = true;
 				errorMsg = "Die angegebene Url ist fehlerhaft";
-			})
+			});
 		}
 	}
 </script>

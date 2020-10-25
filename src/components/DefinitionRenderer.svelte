@@ -1,12 +1,8 @@
 <script>
 	import Feld from "./Feld.svelte";
-  export let components;
-  let error = false, errorMsg
-  export let indexArray = [];
-  export let keyArray = [];
+  export let components, indexArray = [], keyArray = [];
+  let error = false, errorMsg;
 
-  // durch components loopen, daten Objekt vorbereiten
-  // console.log(components);
   components.forEach(component => {
     if (component.type === "textfield") {
       let key = component.key;
@@ -44,11 +40,3 @@
     {errorMsg}
   </div>
 {/if}
-
-<style>
-  .form {
-    padding: 2rem;
-    background-color: #ecf0f1;
-    border-radius: 8px;
-  }
-</style>
